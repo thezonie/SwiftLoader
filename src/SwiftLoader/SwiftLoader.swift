@@ -30,7 +30,7 @@ public class SwiftLoader: UIView {
         }
     }
     
-    func rotated(notification: NSNotification) {
+    @objc func rotated(notification: NSNotification) {
         
         let loader = SwiftLoader.sharedInstance
         
@@ -70,8 +70,8 @@ public class SwiftLoader: UIView {
         loader.update()
         
         NotificationCenter.default.addObserver(loader, selector: #selector(loader.rotated(notification: )),
-                                                name: NSNotification.Name.UIDeviceOrientationDidChange,
-                                                object: nil)
+                                               name: UIDevice.orientationDidChangeNotification,
+                                               object: nil)
         
         let height : CGFloat = UIScreen.main.bounds.size.height
         let width : CGFloat = UIScreen.main.bounds.size.width
@@ -229,7 +229,7 @@ public class SwiftLoader: UIView {
             self.backgroundLayer = CAShapeLayer()
             self.backgroundLayer?.strokeColor = self.config.spinnerColor.cgColor
             self.backgroundLayer?.fillColor = self.backgroundColor?.cgColor
-            self.backgroundLayer?.lineCap = kCALineCapRound
+            self.backgroundLayer?.lineCap = .round
             self.backgroundLayer?.lineWidth = CGFloat(self.lineWidth!)
             self.layer.addSublayer(self.backgroundLayer!)
         }
